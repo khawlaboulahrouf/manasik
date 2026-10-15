@@ -22,3 +22,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
+
+Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
+    Route::get('/admin/test', function () {
+        return response()->json([
+            'message' => 'Bienvenue Admin MANASIK'
+        ]);
+    });
+});
+
+Route::middleware(['auth:sanctum', 'role:client'])->group(function () {
+    Route::get('/client/test', function () {
+        return response()->json([
+            'message' => 'Bienvenue Client MANASIK'
+        ]);
+    });
+});
+

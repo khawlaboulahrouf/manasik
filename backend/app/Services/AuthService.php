@@ -40,10 +40,10 @@ class AuthService
         ];
     }
 
-//     public function logout(User $user)
-// {
-//     $user->tokens()
-//          ->where('id', $user->currentAccessToken()->id)
-//          ->delete();
-// }
+    public function logout(User $user)
+{
+    $user->tokens()
+         ->where('id', $user->currentAccessToken()->id)
+         ->delete();
+}
 }

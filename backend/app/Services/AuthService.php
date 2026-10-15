@@ -24,21 +24,21 @@ class AuthService
         ];
     }
 
-//     public function login(array $data)
-//     {
-//         $user = User::where('email', $data['email'])->first();
+    public function login(array $data)
+    {
+        $user = User::where('email', $data['email'])->first();
 
-//         if (!$user || !Hash::check($data['password'], $user->password)) {
-//             return null;
-//         }
+        if (!$user || !Hash::check($data['password'], $user->password)) {
+            return null;
+        }
 
-//         $token = $user->createToken('manasik-token')->plainTextToken;
+        $token = $user->createToken('manasik-token')->plainTextToken;
 
-//         return [
-//             'user' => $user,
-//             'token' => $token,
-//         ];
-//     }
+        return [
+            'user' => $user,
+            'token' => $token,
+        ];
+    }
 
 //     public function logout(User $user)
 // {

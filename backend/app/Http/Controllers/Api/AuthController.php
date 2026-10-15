@@ -28,26 +28,26 @@ class AuthController extends Controller
         ], 201);
     }
 
-    // public function login(Request $request)
-    // {
-    //     $data = $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required',
-    //     ]);
+    public function login(Request $request)
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    //     $result = $this->authService->login($data);
+        $result = $this->authService->login($data);
 
-    //     if (!$result) {
-    //         return response()->json([
-    //             'message' => 'Email ou mot de passe incorrect',
-    //         ], 401);
-    //     }
+        if (!$result) {
+            return response()->json([
+                'message' => 'Email ou mot de passe incorrect',
+            ], 401);
+        }
 
-    //     return response()->json([
-    //         'message' => 'Connexion réussie',
-    //         ...$result,
-    //     ]);
-    // }
+        return response()->json([
+            'message' => 'Connexion réussie',
+            ...$result,
+        ]);
+    }
 
     // public function me(Request $request)
     // {

@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import AuthLayout from "../components/AuthLayout";
 import api from "../services/api";
+import { useAuth } from "../context/AuthContext";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -40,8 +42,7 @@ export default function Register() {
     try {
       const response = await api.post("/register", form);
 
-      sessionStorage.setItem("token", response.data.token);
-      sessionStorage.setItem("user", JSON.stringify(response.data.user));
+      login(response.data.user, response.data.token);
 
       navigate("/client");
     } catch (err) {

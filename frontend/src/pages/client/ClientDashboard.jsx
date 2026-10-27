@@ -1,6 +1,7 @@
 
 import { useAuth } from "../../context/AuthContext";
 import LogoutButton from "../../components/LogoutButton";
+import { Link } from "react-router-dom";
 
 export default function ClientDashboard() {
   const { user } = useAuth();
@@ -22,7 +23,7 @@ export default function ClientDashboard() {
           </p>
 
           <h1 className="text-2xl font-bold md:text-4xl">
-            Salam {user?.name || "cher voyageur"} !
+            Bonjour {user?.name || "cher voyageur"} !
           </h1>
 
           <p className="mt-3 max-w-xl text-sm leading-6 text-emerald-50 md:text-base">
@@ -30,12 +31,12 @@ export default function ClientDashboard() {
             Découvrez nos offres Omra et Hajj.
           </p>
 
-          <a
-            href="#offres"
+          <Link
+            to="/packages"
             className="mt-6 inline-block rounded-lg bg-amber-400 px-5 py-3 text-sm font-semibold text-emerald-950 hover:bg-amber-300"
           >
             Découvrir les offres
-          </a>
+          </Link>
         </section>
 
         <section id="offres" className="py-10">

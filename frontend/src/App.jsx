@@ -2,11 +2,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
-import LogoutButton from "./components/LogoutButton";
 import ClientDashboard from "./pages/client/ClientDashboard";
-
+import Packages from "./pages/Packages";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminPackages from "./pages/admin/AdminPackages";
 
 function App() {
   return (
@@ -19,22 +20,15 @@ function App() {
           <Route path="/register" element={<Register />} />
 
           <Route element={<ProtectedRoute />}>
-            <Route
-              path="/client"
-              element={<ClientDashboard />}
-            />
+            <Route path="/client" element={<ClientDashboard />} />
+            <Route path="/packages" element={<Packages />} />
           </Route>
 
           <Route element={<ProtectedRoute role="admin" />}>
-            <Route
-              path="/admin"
-              element={
-                <div className="p-6">
-                  <h1>Dashboard Admin MANASIK</h1>
-                  <LogoutButton />
-                </div>
-              }
-            />
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Route>
+          <Route element={<ProtectedRoute role="admin" />}>
+            <Route path="/admin/packages" element={<AdminPackages />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />

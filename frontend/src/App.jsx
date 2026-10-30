@@ -9,6 +9,7 @@ import Register from "./pages/Register";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPackages from "./pages/admin/AdminPackages";
 import AdminDepartures from "./pages/admin/AdminDepartures";
+import MyReservations from "./pages/client/MyReservations";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/client" element={<ClientDashboard />} />
             <Route path="/packages" element={<Packages />} />
+            <Route
+              path="/client/reservations"
+              element={<MyReservations />}
+            />
           </Route>
 
           <Route element={<ProtectedRoute role="admin" />}>

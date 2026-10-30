@@ -65,13 +65,24 @@ export default function ClientDashboard() {
               </p>
             </article>
 
-            <article className="rounded-xl border border-gray-200 bg-white p-5">
+            <Link
+              to="/client/reservations"
+              className="block rounded-xl border border-gray-200 bg-white p-5 transition hover:-translate-y-1 hover:border-emerald-700 hover:shadow-md"
+            >
               <span className="text-2xl">📋</span>
-              <h3 className="mt-3 font-bold">Mes réservations</h3>
+
+              <h3 className="mt-3 font-bold text-gray-800">
+                Mes réservations
+              </h3>
+
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 Retrouvez ici vos demandes et vos réservations.
               </p>
-            </article>
+
+              <span className="mt-4 inline-block text-sm font-semibold text-emerald-800">
+                Consulter mes réservations →
+              </span>
+            </Link>
           </div>
         </section>
       </main>

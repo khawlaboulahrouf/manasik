@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PackageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\DepartureController;
+use App\Http\Controllers\Api\ReservationController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -28,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/departures', [DepartureController::class, 'index']);
     Route::get('/departures/{departure}', [DepartureController::class, 'show']);
+
+  
 });
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
@@ -45,7 +48,18 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
         Route::put('/departures/{departure}', [DepartureController::class, 'update']);
         Route::patch('/departures/{departure}', [DepartureController::class, 'update']);
         Route::delete('/departures/{departure}', [DepartureController::class, 'destroy']);
+
+           Route::get('/admin/reservations', [
+            ReservationController::class,
+            'adminIndex',
+        ]);
+
+        Route::patch('/admin/reservations/{reservation}/status', [
+            ReservationController::class,
+            'updateStatus',
+        ]);
 });
+
 
 Route::middleware(['auth:sanctum', 'role:client'])->group(function () {
     Route::get('/client/test', function () {
@@ -53,5 +67,16 @@ Route::middleware(['auth:sanctum', 'role:client'])->group(function () {
             'message' => 'Bienvenue Client MANASIK'
         ]);
     });
+
+    Route::get('/reservations', [
+        ReservationController::class,
+        'index',
+    ]);
+
+    Route::post('/reservations', [
+        ReservationController::class,
+        'store',
+    ]);
 });
+
 

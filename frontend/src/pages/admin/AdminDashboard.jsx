@@ -34,18 +34,17 @@ export default function AdminDashboard() {
               Ajouter, modifier et supprimer les offres Omra et Hajj.
             </p>
           </Link>
-
-          <div className="rounded-xl bg-white p-6 shadow">
+          <Link
+            to="/admin/departures"
+            className="rounded-xl bg-white p-6 shadow transition hover:shadow-lg"
+          >
             <h3 className="mb-2 text-xl font-semibold text-emerald-800">
               Gestion des départs
             </h3>
             <p className="text-gray-600">
-              Gérer les dates de départ, de retour et les prix.
+              Gérer les dates de départ, de retour, les prix et les places disponibles.
             </p>
-            <span className="mt-3 inline-block text-sm text-gray-400">
-              À développer
-            </span>
-          </div>
+          </Link>
 
           <div className="rounded-xl bg-white p-6 shadow">
             <h3 className="mb-2 text-xl font-semibold text-emerald-800">

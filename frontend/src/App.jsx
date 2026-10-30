@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPackages from "./pages/admin/AdminPackages";
+import AdminDepartures from "./pages/admin/AdminDepartures";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
           </Route>
           <Route element={<ProtectedRoute role="admin" />}>
             <Route path="/admin/packages" element={<AdminPackages />} />
+          </Route>
+
+          <Route element={<ProtectedRoute role="admin" />}>
+            <Route path="/admin/departures" element={<AdminDepartures />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/login" replace />} />

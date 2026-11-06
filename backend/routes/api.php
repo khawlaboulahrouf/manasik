@@ -26,11 +26,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/packages', [PackageController::class, 'index']);
     Route::get('/packages/{package}', [PackageController::class, 'show']);
-    
+
     Route::get('/departures', [DepartureController::class, 'index']);
     Route::get('/departures/{departure}', [DepartureController::class, 'show']);
-
-  
 });
 
 Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
@@ -45,19 +43,23 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::delete('/packages/{package}', [PackageController::class, 'destroy']);
 
     Route::post('/departures', [DepartureController::class, 'store']);
-        Route::put('/departures/{departure}', [DepartureController::class, 'update']);
-        Route::patch('/departures/{departure}', [DepartureController::class, 'update']);
-        Route::delete('/departures/{departure}', [DepartureController::class, 'destroy']);
+    Route::put('/departures/{departure}', [DepartureController::class, 'update']);
+    Route::patch('/departures/{departure}', [DepartureController::class, 'update']);
+    Route::delete('/departures/{departure}', [DepartureController::class, 'destroy']);
 
-           Route::get('/admin/reservations', [
-            ReservationController::class,
-            'adminIndex',
-        ]);
+    Route::get('/admin/reservations', [
+        ReservationController::class,
+        'adminIndex',
+    ]);
 
-        Route::patch('/admin/reservations/{reservation}/status', [
-            ReservationController::class,
-            'updateStatus',
-        ]);
+    Route::patch('/admin/reservations/{reservation}/status', [
+        ReservationController::class,
+        'updateStatus',
+    ]);
+    Route::get('/admin/statistics', [
+        ReservationController::class,
+        'statistics',
+    ]);
 });
 
 
@@ -78,5 +80,3 @@ Route::middleware(['auth:sanctum', 'role:client'])->group(function () {
         'store',
     ]);
 });
-
-

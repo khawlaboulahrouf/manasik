@@ -56,10 +56,32 @@ class ReservationService
         });
     }
 
-    public function updateStatus(
-        Reservation $reservation,
-        string $statut
-    ): Reservation {
+  
+public function updateStatus(
+    Reservation $reservation,
+    string $statut
+): Reservation {
+    return DB::transaction(function () use ($reservation, $statut) {
+
+        $reservation = Reservation::query()
+            ->whereKey($reservation->id)
+            ->lockForUpdate()
+            ->firstOrFail();
+
+        // Si le statut n'a pas changé
+        if ($reservation->statut === $statut) {
+            return $reservation->load('user', 'departure.package');
+        }
+
+        // Une réservation annulée ne peut pas être réactivée
+        if ($reservation->statut === 'annulee') {
+            throw ValidationException::withMessages([
+                'statut' => [
+                    'Une réservation annulée ne peut pas être réactivée.',
+                ],
+            ]);
+        }
+
         $reservation->update([
             'statut' => $statut,
         ]);
@@ -68,5 +90,7 @@ class ReservationService
             'user',
             'departure.package',
         ]);
-    }
+    });
+}
+
 }

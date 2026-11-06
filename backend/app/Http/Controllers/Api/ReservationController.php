@@ -12,6 +12,8 @@ use App\Models\Reservation;
 use App\Services\ReservationService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Models\Package;
+
 
 class ReservationController extends Controller
 {
@@ -71,4 +73,28 @@ class ReservationController extends Controller
             'reservation' => $updatedReservation,
         ]);
     }
+    // Statistiques du dashboard admin
+public function statistics(): JsonResponse
+{
+    return response()->json([
+        'total_reservations' => Reservation::count(),
+
+        'reservations_en_attente' => Reservation::where(
+            'statut',
+            'en_attente'
+        )->count(),
+
+        'reservations_confirmees' => Reservation::where(
+            'statut',
+            'confirmee'
+        )->count(),
+
+        'reservations_annulees' => Reservation::where(
+            'statut',
+            'annulee'
+        )->count(),
+
+        'total_packages' => Package::count(),
+    ]);
+}
 }
